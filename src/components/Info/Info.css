@@ -1,12 +1,46 @@
-.Info {
-    padding-top: 75px;
+.Info{
+    min-height: 650px;
 }
+
+.Info .Info-title{
+    font-size: 25px;
+    text-align: center;
+    padding: 10px 0px;
+    font-weight: bold;
+}
+
+.Info .Info-imgWrap{
+    width: 100%;
+}
+
+.Info .Info-imgWrap img{
+    width: 100%;
+    height: auto;
+} 
 
 .Info .Info-content{
     padding: 20px;
-    font-size: 20px;
+    font-size: 1.2rem;
 }
 
-.Info .Info-content div{
-    padding: 1px 0;
+.Info .Info-content > div{
+    padding: 5px 0;
+}
+
+.Info .Info-content > div::after{
+    display: block;
+    clear: both;
+    content: '';
+}
+
+.Info .Info-content > div > div:nth-child(1){
+    float: left;
+    color:#379FFF;
+    width: 20%;
+}
+
+.Info .Info-content > div > div:nth-child(2){
+    float: left;
+    padding-left: 30px;
+    width: 80%;
 }

@@ -4,10 +4,14 @@ import axios from 'axios';
 import API_KEY from 'static/key.json';
 
 let start = 0;
-let end = 0;
+let end = 3;
 
 function getItemsAPI() {
-  return axios.get(`http://openapi.seoul.go.kr:8088/${API_KEY.key}/json/SearchConcertDetailService/1/100`);
+  return axios.get(`http://openapi.seoul.go.kr:8088/${API_KEY.key}/json/SearchConcertDetailService/1/300`);
+}
+
+function selectedItemAPI(value) {
+  return axios.get(`http://openapi.seoul.go.kr:8088/${API_KEY.key}/json/SearchConcertDetailService/1/300/${value}`);
 }
 
 function sliceItems(sum, arr) {
@@ -29,18 +33,20 @@ const GETITEMS = 'list/GETITEMS';
 const SELECTITEM = 'list/SELECTITEM';
 const CHANGE = 'list/CHANGE';
 const APPENDITEMS = 'list/APPENDITEMS';
+const OPTION = 'list/OPITON';
 
 // // 액션 생성 함수를 만듭니다. 이 함수들은 나중에 다른 파일에서 불러와야 하므로 내보내줍니다.
 export const getItems = createAction(GETITEMS, getItemsAPI);
 export const change = createAction(CHANGE, data => data);
-export const selectedItem = createAction(SELECTITEM, value => value);
+export const selectedItem = createAction(SELECTITEM, selectedItemAPI);
 export const appendItems = createAction(APPENDITEMS, value => value);
+export const optionCheck = createAction(OPTION, value => value);
 
 // // 모듈의 초기 상태를 정의합니다.
 const initialState = {
-  keyword: '',
-  option: '',
-  selected: '',
+  // title: '',
+  // genre: '',
+  // selected: '',
   items: [],
   sliceItems: [],
 };
@@ -60,6 +66,18 @@ export default handleActions({
     },
   }),
 
+
+  ...pender({
+    type: SELECTITEM,
+    onSuccess: (state, { payload }) => {
+      const { data } = payload;
+      return {
+        ...state,
+        selected : [...data.SearchConcertDetailService.row],
+      };
+    },
+  }),
+
   [APPENDITEMS]: (state, { payload }) => {
     const arr = sliceItems(payload, state.items);
     return {
@@ -71,8 +89,12 @@ export default handleActions({
     };
   },
 
-  //   [SELECTITEM]: (state, { payload }) => {     return {     };   },
-  // [CHANGE]: (state, { payload }) => {     return {       ...state,
-  // [payload[0]]: payload[1],     };   },
+
+  [CHANGE]: (state, { payload }) => {
+    return {
+      ...state,
+      [payload[0]]: payload[1],
+    };
+  },
 
 }, initialState);

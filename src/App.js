@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 
 import { DetailContainer, ListContainer } from 'containers';
 import 'antd/dist/antd.min.css';
+import 'App.css';
 
 class App extends Component {
   render() {

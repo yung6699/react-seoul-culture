@@ -1,0 +1,16 @@
+
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #0A0500;
+    font-size: 20px;
+}
+  
+
+ .ant-layout-header{
+     color: #fff;
+     text-align: center;
+     font-size: 30px;
+ }
