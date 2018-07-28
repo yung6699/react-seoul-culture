@@ -1,0 +1,12 @@
+.Info {
+    padding-top: 75px;
+}
+
+.Info .Info-content{
+    padding: 20px;
+    font-size: 20px;
+}
+
+.Info .Info-content div{
+    padding: 1px 0;
+}
